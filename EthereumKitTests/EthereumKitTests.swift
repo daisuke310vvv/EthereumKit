@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import CryptoSwift
 @testable import EthereumKit
 
 class EthereumKitTests: XCTestCase {
@@ -32,7 +31,7 @@ class EthereumKitTests: XCTestCase {
         let mnemonic = Mnemonic.create(entropy: entropy)
         let seed = Mnemonic.createSeed(mnemonic: mnemonic)
         XCTAssertEqual(
-            seed.toHexString(),
+            seed.hex,
             "3779b041fab425e9c0fd55846b2a03e9a388fb12784067bd8ebdb464c2574a05bcc7a8eb54d7b2a2c8420ff60f630722ea5132d28605dbc996c8ca7d7a8311c0"
         )
         
@@ -40,7 +39,7 @@ class EthereumKitTests: XCTestCase {
         let mnemonic2 = Mnemonic.create(entropy: entropy2)
         let seed2 = Mnemonic.createSeed(mnemonic: mnemonic2)
         XCTAssertEqual(
-            seed2.toHexString(),
+            seed2.hex,
             "2bb2ea75d2891584559506b2429426722bfa81958c824affb84b37def230fe94a7da1701d550fef6a216176de786150d0a4f2b7b3770139582c1c01a6958d91a"
         )
     }
@@ -72,7 +71,7 @@ class EthereumKitTests: XCTestCase {
         )
         
         XCTAssertEqual(
-            firstPrivateKey.raw.toHexString(),
+            firstPrivateKey.raw.hex,
             "df02cbea58239744a8a6ba328056309ae43f86fec6db45e5f782adcf38aacadf"
         )
     }
@@ -83,16 +82,16 @@ class EthereumKitTests: XCTestCase {
         let seed = Mnemonic.createSeed(mnemonic: mnemonic)
         let wallet = Wallet(seed: seed, network: .main)
         
-        let firstAddress = wallet.generateAddress(at: 0)
+        let firstAddress = wallet.receiveAddress(at: 0)
         XCTAssertEqual(firstAddress, "0x83f1caAdaBeEC2945b73087F803d404F054Cc2B7")
         
-        let secondAddress = wallet.generateAddress(at: 1)
+        let secondAddress = wallet.receiveAddress(at: 1)
         XCTAssertEqual(secondAddress, "0xb3c3D923CFc4d551b38Db8A86BbA42B623D063cE")
         
-        let thirdAddress = wallet.generateAddress(at: 2)
+        let thirdAddress = wallet.receiveAddress(at: 2)
         XCTAssertEqual(thirdAddress, "0x82e35B34CfBEB9704E51Eb17f8263d919786E66a")
         
-        let forthAddress = wallet.generateAddress(at: 3)
+        let forthAddress = wallet.receiveAddress(at: 3)
         XCTAssertEqual(forthAddress, "0xCF1D652DAb65ea4f10990FD2D2E59Cd7cbEb315a")
         
     }

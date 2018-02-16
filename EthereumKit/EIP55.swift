@@ -3,7 +3,7 @@
 //  EthereumKit
 //
 //  Created by yuzushioh on 2018/02/11.
-//  Copyright © 2018 yuzushioh. All rights reserved.
+//  Copyright © 2018 yuzushioh.
 //
 
 import Foundation
@@ -13,8 +13,8 @@ import CryptoSwift
 
 struct EIP55 {
     static func encode(_ data: Data) -> String {
-        let address = data.toHexString()
-        let hash = address.data(using: .ascii)!.sha3(.keccak256).toHexString()
+        let address = data.hex
+        let hash = address.data(using: .ascii)!.sha3(.keccak256).hex
         
         return zip(address, hash)
             .map { a, h -> String in
